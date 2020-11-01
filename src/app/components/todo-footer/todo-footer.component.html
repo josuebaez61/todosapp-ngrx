@@ -1,0 +1,29 @@
+<!-- This footer should hidden by default and shown when there are todos -->
+<footer class="footer">
+    <!-- This should be `0 items left` by default -->
+    <span class="todo-count"><strong>{{ pending }}</strong> item left</span>
+    <!-- Remove this if you don't implement routing -->
+    <ul *ngFor="let filter of filters; let index = i" class="filters">
+
+        <span [ngSwitch]="filter[i]">
+            <li *ngSwitchCase="all">
+                <a (click)="onChangeFilter('all')" [ngClass]="{'selected': filterSelected === 'all'}">All</a>
+            </li>
+
+            <li *ngSwitchCase="allCompleted">
+                <a (click)="onChangeFilter('allCompleted')" [ngClass]="{'selected': filterSelected === 'allCompleted'}">Completed</a>
+            </li>
+
+            <li *ngSwitchCase="allActive">
+                <a (click)="onChangeFilter('allActive')" [ngClass]="{'selected': filterSelected === 'allActive'}">Active</a>
+            </li>
+
+            <li *ngSwitchDefault>
+                <a (click)="onChangeFilter('all')" [ngClass]="{'selected': filterSelected === 'all'}">All</a>
+            </li>
+        </span>
+
+    </ul>
+    <!-- Hidden if no completed items are left ↓ -->
+    <button (click)="clean()" class="clear-completed">Clear completed</button>
+</footer>
